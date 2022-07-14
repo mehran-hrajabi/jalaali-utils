@@ -15,6 +15,7 @@ const jalaliMonths: { [key: string]: string } = {
 const jalaliWeekday = ['یکشنبه', 'دوشنبه', 'سه شنبه', 'چهارشنبه', 'پنج شنبه', 'جمعه', 'شنبه'];
 
 const ConvertDateToFullTextJalali = (date: Date) => {
+    // standard input is something like this : Thu Jul 14 2022 17:32:14 GMT+0430 (Iran Daylight Time)
 	const jalaliDate = date.toLocaleDateString('fa-IR');
 	const jalaliTime = date.toLocaleTimeString('fa-IR');
 
@@ -39,21 +40,27 @@ const ConvertDateToFullTextJalali = (date: Date) => {
 	);
 };
 
-export const ConverUtcToFullTextJalali = (utc: string) => {
-	const parsedDate = new Date(utc);
-	const localizedDate = new Date(parsedDate.getTime() - parsedDate.getTimezoneOffset() * 60000);
+export const ConvertUtcToFullTextJalali = (utc: string) => {
+    // standard input is something like this : 2022-07-14T13:02:14.217Z
+	const parsedDate = new Date(utc.includes('Z') ? utc : utc + 'Z');
 
-	return ConvertDateToFullTextJalali(localizedDate);
+	return ConvertDateToFullTextJalali(parsedDate);
 };
 
 export const ConvertUtcToJalali = (utc: string) => {
-	const parsedDate = new Date(utc);
-	const localizedDate = new Date(parsedDate.getTime() - parsedDate.getTimezoneOffset() * 60000);
-	let jalaliDate = localizedDate.toLocaleDateString('fa-IR');
-	let jalaliTime = localizedDate.toLocaleTimeString('fa-IR');
+    // standard input is something like this : 2022-07-14T13:02:14.217Z
+	const parsedDate = new Date(utc.includes('Z') ? utc : utc + 'Z');
+	let jalaliDate = parsedDate.toLocaleDateString('fa-IR');
+	let jalaliTime = parsedDate.toLocaleTimeString('fa-IR');
 	return jalaliDate + ' ' + jalaliTime;
 };
 
 export const ConvertDateToUtc = (date: Date) => {
-	return new Date(date).toISOString().slice(0, -1);
+    // standard input is something like this : Thu Jul 14 2022 17:32:14 GMT+0430 (Iran Daylight Time)
+	return date.toISOString();
+};
+
+export const ConvertUtcToDate = (utc: string) => {
+    // standard input is something like this : 2022-07-14T13:02:14.217Z
+    return new Date(utc);
 };
