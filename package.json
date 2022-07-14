@@ -1,0 +1,22 @@
+{
+  "name": "jalaali-utils",
+  "version": "0.1.0",
+  "description": "Pure JavaScript util functions for Jalaali date conversions.",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mehran-hrajabi/jalaali-utils.git"
+  },
+  "author": "Mehran Hajirajabi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mehran-hrajabi/jalaali-utils/issues"
+  },
+  "homepage": "https://github.com/mehran-hrajabi/jalaali-utils#readme",
+  "dependencies": {
+    "typescript": "^4.7.4"
+  }
+}
